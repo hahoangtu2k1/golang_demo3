@@ -1,9 +1,16 @@
 package main
 
-import (
-	"fmt"
-)
-
 func main() {
-	fmt.Println("demo golang 3")
+	routineWaitGroup()
+	goMutex()
+	chanRoutine()
+	mu.Lock()
+	wg.Add(3)
+	go mapMutex()
+	go mapMutex()
+	go mapMutex()
+	wg.Wait()
+	mu.Unlock()
+	errFunc()
+	test4()
 }
