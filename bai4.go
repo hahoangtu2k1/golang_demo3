@@ -13,7 +13,9 @@ type Line struct {
 	data        string
 }
 
-//ex4: bài tập worker pool: tạo bằng tay file dưới. file.txt sau đó đọc từng dòng file này nạp dữ liệu vào 1 buffer channel có size 10, Điều kiện đọc file từng dòng. Chỉ được sử dụng 3 go routine. Kết quả xử lý xong ỉn ra màn hình + từ xong
+/*ex4: bài tập worker pool: tạo bằng tay file dưới. file.txt sau đó đọc từng dòng file này nạp dữ liệu vào 1 buffer channel
+có size 10, Điều kiện đọc file từng dòng. Chỉ được sử dụng 3 go routine. Kết quả xử lý xong ỉn ra màn hình + từ xong*/
+
 func test4() {
 	ch := make(chan string, 10)
 	finish := make(chan bool)
@@ -34,7 +36,7 @@ func test4() {
 			wg.Wait()
 		}
 		time.Sleep(1 * time.Second)
-		app := append(line, &Line{})
+		app := append(line, &Line{line_number: num, data: scanner.Text()})
 		num++
 		for i := range app {
 			fmt.Printf("%v giá trị là: %v\n", app[i].line_number, app[i].data)
