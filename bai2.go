@@ -10,10 +10,9 @@ func mapMutex() {
 	X["name"] = "Hà Hoàng Tú"
 	for j := 0; j <= numFor; j++ {
 		for i := 0; i <= 1000; i++ {
-
 			fmt.Println(X)
 		}
 	}
-	// wg.Done()
+	wg.Done()
 
 }
