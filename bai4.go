@@ -28,14 +28,14 @@ func test4() {
 	defer access.Close()
 	scanner := bufio.NewScanner(access)
 	for scanner.Scan() {
-		ch <- scanner.Text()
+		//ch <- scanner.Text()
 		for i := 0; i < 3; i++ {
 			wg.Add(1)
 			go chan_nel(finish, ch, scanner)
 			wg.Done()
 			wg.Wait()
 		}
-		time.Sleep(1 * time.Second)
+		time.Sleep(100 * time.Nanosecond)
 		app := append(line, &Line{line_number: num, data: scanner.Text()})
 		num++
 		for i := range app {
@@ -47,9 +47,9 @@ func test4() {
 }
 
 func chan_nel(finish chan bool, ch chan string, scanner *bufio.Scanner) {
-	for range scanner.Text() {
-		fmt.Printf("Giá trị %v đã lấy ra\n", <-ch)
-	}
+	// for range scanner.Text() {
+	// 	fmt.Printf("Giá trị %v đã lấy ra\n", <-ch)
+	// }
 	finish <- false
 	close(finish)
 	close(ch)

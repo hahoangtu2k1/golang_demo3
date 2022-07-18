@@ -3,13 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-	"sync"
 	"time"
 )
 
-var wg = sync.WaitGroup{}
-var mu = sync.Mutex{}
-var X = make(map[string]string)
 var chann = make(chan bool)
 
 func routineWaitGroup() {
@@ -17,7 +13,7 @@ func routineWaitGroup() {
 	wg.Add(1)
 	log.Print("hello 1")
 	go func() {
-		time.Sleep(1 * time.Second)
+		time.Sleep(100 * time.Millisecond)
 		log.Print("hello 3")
 		wg.Done()
 	}()
@@ -29,7 +25,7 @@ func goMutex() {
 	mu.Lock()
 	log.Print("hello 1")
 	go func() {
-		time.Sleep(1 * time.Second)
+		time.Sleep(100 * time.Millisecond)
 		log.Print("hello 3")
 		mu.Unlock()
 	}()
@@ -41,7 +37,7 @@ func chanRoutine() {
 	fmt.Println("chanRoutine")
 	log.Print("hello 1")
 	go func() {
-		time.Sleep(1 * time.Second)
+		time.Sleep(100 * time.Millisecond)
 		log.Print("hello 3")
 		chann <- true
 	}()
@@ -49,12 +45,3 @@ func chanRoutine() {
 	log.Print("hello 2")
 
 }
-
-// func mapMutex() {
-// 	X["name"] = "Hà Hoàng Tú"
-// 	for i := 0; i <= 1000; i++ {
-
-// 		fmt.Println(X)
-// 	}
-
-// }
